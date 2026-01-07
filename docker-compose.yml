@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:main-slim
+    container_name: czech_openwebui
+    ports:
+      - "3000:8080"
+    volumes:
+      - openwebui_data:/app/backend/data
+    env_file:
+      - .env
+    environment:
+      # =========================
+      # General
+      # =========================
+      - WEBUI_NAME=Czech OpenWebUI
+
+      # =========================
+      # e-INFRA Generative Models
+      # =========================
+      - OPENAI_API_BASE_URL=https://chat.ai.e-infra.cz/api
+      - OPENAI_API_KEY=${EINFRA_API_KEY}
+      - OPENAI_API_TYPE=openai
+
+      # =========================
+      # RAG – Embeddings
+      # =========================
+      - RAG_EMBEDDING_ENGINE=openai
+      - RAG_EMBEDDING_BASE_URL=${EMBEDDING_BASE_URL}
+      - RAG_EMBEDDING_API_KEY=${EMBEDDING_API_KEY}
+      - RAG_EMBEDDING_MODEL=${EMBEDDING_MODEL}
+
+      # =========================
+      # RAG – Defaults
+      # =========================
+      - RAG_TOP_K=10
+      - RAG_ENABLE_QUERY_REWRITE=true
+      - RAG_CHUNK_SIZE=1000
+      - RAG_CHUNK_OVERLAP=100
+
+    restart: unless-stopped
+
+volumes:
+  openwebui_data:
