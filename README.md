@@ -22,7 +22,7 @@ The master thesis mainly compared different embedders and did a small scale stud
 ### 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone git@github.com:sajdoann/czech_openwebui.git
 cd czech_openwebui
 ```
 
@@ -45,6 +45,7 @@ cp example.env .env
 export EINFRA_API_KEY="your-key-here"
 curl -H "Authorization: Bearer $EINFRA_API_KEY" https://llm.ai.e-infra.cz/v1/models | jq .data[].id
 ```
+You should see a list of available generative models in e-INFRA.
 
 ## Embedding Model Setup
 
